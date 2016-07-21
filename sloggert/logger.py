@@ -69,7 +69,7 @@ class Logger:
             ('_tags_', pymongo.ASCENDING),
         ])
 
-    def _log(self, level_num, tags, **kwargs):
+    def _log(self, args, level_num, tags, **kwargs):
         dt = datetime.now()
         day = dt.date()
         kwargs.update({
@@ -80,6 +80,9 @@ class Logger:
             '_tags_': tags,
             '_host_': self.hostname,
         })
+        if args:
+            kwargs['_msg_'] = args[0]
+        self.coll.insert_one(kwargs)
 
     def _make_daystr(self, day):
         if isinstance(day, date):
@@ -95,20 +98,20 @@ class Logger:
         else:
             return hour.replace(' ', 'T')
 
-    def debug(self, tags=None, **kwargs):
-        self._log(Level.DEBUG.value, tags or [], **kwargs)
+    def debug(self, *args, tags=None, **kwargs):
+        self._log(args, Level.DEBUG.value, tags or [], **kwargs)
 
-    def info(self, tags=None, **kwargs):
-        self._log(Level.INFO.value, tags or [], **kwargs)
+    def info(self, *args, tags=None, **kwargs):
+        self._log(args, Level.INFO.value, tags or [], **kwargs)
 
-    def warning(self, tags=None, **kwargs):
-        self._log(Level.WARNING.value, tags or [], **kwargs)
+    def warning(self, *args, tags=None, **kwargs):
+        self._log(args, Level.WARNING.value, tags or [], **kwargs)
 
-    def error(self, tags=None, **kwargs):
-        self._log(Level.ERROR.value, tags or [], **kwargs)
+    def error(self, *args, tags=None, **kwargs):
+        self._log(args, Level.ERROR.value, tags or [], **kwargs)
 
-    def critical(self, tags=None, **kwargs):
-        self._log(Level.CRITICAL.value, tags or [], **kwargs)
+    def critical(self, *args, tags=None, **kwargs):
+        self._log(args, Level.CRITICAL.value, tags or [], **kwargs)
 
     def get_day(self, day):
         daystr = self._make_daystr(day)
