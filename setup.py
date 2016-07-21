@@ -40,13 +40,8 @@ setup(
         'Operating System :: Microsoft :: Windows',
         'Programming Language :: Python',
     ],
-    install_requires=[
-    ],
-    entry_points={
-        'console_scripts': [
-            'sloggert=sloggert:main',
-        ],
-    },
+    install_requires=['pymongo'],
+    entry_points={},
     # If you get errors running setup.py install:
     # zip_safe=False,
     #
