@@ -14,10 +14,6 @@ __all__ = ('Logger', 'Level')
 
 class Logger(MessageDB):
 
-    def __init__(self, name, host='127.0.0.1', port=27017, hostname=None):
-        super(Logger, self).__init__(name, host=host, port=port,
-                                     hostname=hostname)
-
     def _log(self, args, level_num, tags, **kwargs):
         dt = datetime.now()
         day = dt.date()
