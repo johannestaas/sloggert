@@ -10,16 +10,6 @@ From the project root directory::
 
     $ python setup.py install
 
-Usage
------
-
-Simply run it::
-
-    $ sloggert
-
-Use --help/-h to view info on the arguments::
-
-    $ sloggert --help
 
 Release Notes
 -------------
