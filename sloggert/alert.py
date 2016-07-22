@@ -56,6 +56,3 @@ class Alerter(MessageDB):
                     print(json.dumps(msg))
             else:
                 print(query)
-
-    def run(self):
-        results = self.query()
