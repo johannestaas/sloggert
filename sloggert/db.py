@@ -50,18 +50,18 @@ class MessageDB:
             query['_day_'] = make_daystr(day)
         if hour is not None:
             query['_hour_'] = make_hourstr(hour)
-        return self.coll.find(query)
+        return self.coll.find(query).sort({'_datetime_': 1})
 
     def select(self, field):
-        return self.coll.find(field.build_query())
+        return self.coll.find(field.build_query()).sort({'_datetime_': 1})
 
     def get_day(self, day):
         daystr = make_daystr(day)
-        return self.coll.find({'_day_': daystr})
+        return self.coll.find({'_day_': daystr}).sort({'_datetime_': 1})
 
     def get_hour(self, hour):
         hourstr = make_hourstr(hour)
-        return self.coll.find({'_hour_': hourstr})
+        return self.coll.find({'_hour_': hourstr}).sort({'_datetime_': 1})
 
 
 class DeltaValue:
