@@ -5,7 +5,7 @@ sloggert.alert
 Handles alerting logic and aggregation from rules.
 '''
 from .db import MessageDB
-from .util import make_daystr, make_hourstr
+from .util import make_daystr, make_hourstr, make_datetime
 from .level import Level
 
 
@@ -31,6 +31,9 @@ class Field:
         elif field == 'hour':
             self._converter = make_hourstr
             return '_hour_'
+        elif field == 'datetime':
+            self._converter = make_datetime
+            return '_datetime_'
         elif field == 'msg':
             return '_msg_'
         elif field == 'hostname':
