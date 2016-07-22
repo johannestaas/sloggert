@@ -52,8 +52,12 @@ class MessageDB:
             query['_hour_'] = make_hourstr(hour)
         return self.coll.find(query).sort('_datetime_', 1)
 
-    def select(self, field):
-        return self.coll.find(field.build_query()).sort('_datetime_', 1)
+    def select(self, field, count=False, **kwargs):
+        results = self.coll.find(field.build_query()).sort('_datetime_', 1)
+        if count:
+            return results.count()
+        else:
+            return results
 
     def get_day(self, day):
         daystr = make_daystr(day)
