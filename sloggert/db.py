@@ -8,7 +8,7 @@ import socket
 import pymongo
 from .level import Level
 from .util import make_daystr, make_hourstr, make_datetime
-from .config import CONF
+from .config import CONF, load_config
 
 
 class MessageDB:
@@ -16,11 +16,13 @@ class MessageDB:
     DBS = {}
 
     def __init__(self, name, host=None, port=None, hostname=None,
-                 **kwargs):
+                 config_path=None, **kwargs):
         self.name = name
         self.hostname = hostname or CONF.get('hostname', socket.gethostname())
         self.host = host or CONF.get('host', '127.0.0.1')
         self.port = int(port or CONF.get('port', 27017))
+        if config_path is not None:
+            load_config(config_path)
         if MessageDB.CLIENT is None:
             client_str = 'mongodb://{host}:{port}/'.format(host=host, port=port)
             MessageDB.CLIENT = pymongo.MongoClient(client_str)
