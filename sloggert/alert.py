@@ -90,6 +90,10 @@ class Alerter(MessageDB):
             for processed in self.process(name):
                 yield processed
 
+    def print(self, name):
+        for processed in self.process(name):
+            print(processed)
+
     def print_all(self):
         for processed in self.process_all():
             print(processed)
