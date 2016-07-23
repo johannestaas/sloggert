@@ -41,7 +41,11 @@ setup(
         'Programming Language :: Python',
     ],
     install_requires=['pymongo'],
-    entry_points={},
+    entry_points={
+        'console_scripts': [
+            'sloggert = sloggert:main',
+        ],
+    },
     # If you get errors running setup.py install:
     # zip_safe=False,
     #

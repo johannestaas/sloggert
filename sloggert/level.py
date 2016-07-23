@@ -27,6 +27,13 @@ class Level(Enum):
                                 'Please use one of "debug", "info", "warning", '
                                 '"error", or "critical".'.format(s))
 
+    @classmethod
+    def from_int(cls, n):
+        try:
+            return REVERSE_MAP[n]
+        except KeyError:
+            raise LogLevelError('Log level {!r} does not exist.'.format(n))
+
 
 LEVEL_MAP = {
     'debug': Level.DEBUG,
@@ -34,4 +41,12 @@ LEVEL_MAP = {
     'warning': Level.WARNING,
     'error': Level.ERROR,
     'critical': Level.CRITICAL,
+}
+
+REVERSE_MAP = {
+    10: 'debug',
+    20: 'info',
+    30: 'warning',
+    40: 'error',
+    50: 'critical',
 }
