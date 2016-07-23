@@ -24,7 +24,8 @@ class MessageDB:
         if config_path is not None:
             load_config(config_path)
         if MessageDB.CLIENT is None:
-            client_str = 'mongodb://{host}:{port}/'.format(host=host, port=port)
+            client_str = 'mongodb://{host}:{port}/'.format(
+                host=self.host, port=self.port)
             MessageDB.CLIENT = pymongo.MongoClient(client_str)
         if not MessageDB.DBS.get(name):
             db_name = 'sloggert_{name}'.format(name=name)
